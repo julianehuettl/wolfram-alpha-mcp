@@ -1,35 +1,35 @@
 # Wolfram Alpha Integration Test
 
-Bitte teste die Wolfram Alpha Integration in Claude Desktop mit folgenden Anfragen:
+Please test the Wolfram Alpha integration in Claude Desktop with the following queries:
 
-1. **Einfache Berechnung**:
-   - Was ist 2 + 2?
-   - Berechne 3 * 4
-   - Was ergibt 10 / 2?
+1. **Simple Calculation**:
+   - What is 2 + 2?
+   - Calculate 3 * 4
+   - What is 10 / 2?
 
-2. **Wissenschaftliche Fakten**:
-   - Wie schnell ist das Licht?
-   - Wie schwer ist die Erde?
-   - Wie heiß ist die Sonne?
+2. **Scientific Facts**:
+   - What is the speed of light?
+   - What is the mass of the Earth?
+   - What is the temperature of the sun?
 
-3. **Einheitenumrechnung**:
-   - Wie viel sind 100 Grad Celsius in Fahrenheit?
-   - Wie viele Meilen sind 1 Kilometer?
-   - Wie viele Pfund sind 1 Kilogramm?
+3. **Unit Conversion**:
+   - What is 100 degrees Celsius in Fahrenheit?
+   - How many miles is 1 kilometer?
+   - How many pounds is 1 kilogram?
 
-4. **Mathematische Probleme**:
-   - Löse die Gleichung x^2 + 2x + 1 = 0
-   - Was ist die Ableitung von x^2?
-   - Berechne das Integral von x^2
+4. **Mathematical Problems**:
+   - Solve the equation x^2 + 2x + 1 = 0
+   - What is the derivative of x^2?
+   - Calculate the integral of x^2
 
-Bitte:
-1. Stelle jede Anfrage einzeln
-2. Warte auf die Antwort des Servers
-3. Überprüfe, ob die Antwort korrekt und vollständig ist
-4. Notiere eventuelle Fehler oder Probleme
+Please:
+1. Submit each query individually
+2. Wait for the server's response
+3. Check if the answer is correct and complete
+4. Note any errors or issues
 
-Erwartetes Verhalten:
-- Der Server sollte auf jede Anfrage antworten
-- Die Antworten sollten korrekt und präzise sein
-- Bei komplexen Anfragen sollten zusätzliche Erklärungen gegeben werden
-- Fehler sollten klar kommuniziert werden 
+Expected Behavior:
+- The server should respond to each query
+- The answers should be correct and precise
+- For complex queries, additional explanations should be provided
+- Errors should be clearly communicated 

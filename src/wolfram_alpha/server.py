@@ -11,7 +11,7 @@ from mcp.server.models import InitializationOptions
 import mcp.server.stdio
 from mcp.types import TextContent
 
-# Konfiguriere Logging
+# Configure logging
 logger = logging.getLogger('wolfram_alpha_server')
 logger.setLevel(logging.INFO)
 handler = logging.StreamHandler(sys.stderr)
@@ -20,21 +20,21 @@ logger.addHandler(handler)
 
 class WolframAlphaServer:
     def __init__(self):
-        logger.info("Initialisiere WolframAlphaServer...")
+        logger.info("Initializing WolframAlphaServer...")
         load_dotenv()
         self.appid = os.getenv("WOLFRAM_ALPHA_APPID")
         if not self.appid:
-            logger.error("WOLFRAM_ALPHA_APPID nicht in .env gefunden")
-            raise ValueError("WOLFRAM_ALPHA_APPID nicht in .env gefunden")
-        logger.info("Server initialisiert mit AppID")
+            logger.error("WOLFRAM_ALPHA_APPID not found in .env")
+            raise ValueError("WOLFRAM_ALPHA_APPID not found in .env")
+        logger.info("Server initialized with AppID")
         
-        # Server-Konfiguration
+        # Server configuration
         self.server_name = "wolfram-alpha"
         self.server_version = "0.1.0"
 
     async def query_wolfram_alpha(self, input_text: str) -> str:
-        """Führt eine Abfrage an Wolfram Alpha durch"""
-        logger.info(f"Führe Abfrage aus: {input_text}")
+        """Performs a query to Wolfram Alpha"""
+        logger.info(f"Executing query: {input_text}")
         url = "https://www.wolframalpha.com/api/v1/llm-api"
         params = {
             "appid": self.appid,
@@ -45,30 +45,30 @@ class WolframAlphaServer:
             response = requests.get(url, params=params)
             
             if response.status_code == 501:
-                raise Exception("Die Eingabe konnte nicht verstanden werden. Bitte formulieren Sie die Anfrage anders.")
+                raise Exception("The input could not be understood. Please rephrase your query.")
             elif response.status_code == 400:
-                raise Exception("Ungültige Anfrage: Input-Parameter fehlt oder ist fehlerhaft.")
+                raise Exception("Invalid request: Input parameter missing or malformed.")
             elif response.status_code == 403:
-                raise Exception("Ungültige oder fehlende AppID. Bitte überprüfen Sie die Konfiguration.")
+                raise Exception("Invalid or missing AppID. Please check your configuration.")
             elif response.status_code != 200:
-                raise Exception(f"Wolfram Alpha API Fehler: Status {response.status_code}")
+                raise Exception(f"Wolfram Alpha API error: Status {response.status_code}")
                 
             return response.text
         except requests.exceptions.RequestException as e:
-            logger.error(f"Fehler bei Wolfram Alpha API: {str(e)}")
-            raise Exception(f"Wolfram Alpha API Fehler: {str(e)}")
+            logger.error(f"Error with Wolfram Alpha API: {str(e)}")
+            raise Exception(f"Wolfram Alpha API error: {str(e)}")
 
     def get_tools(self) -> List[Dict[str, Any]]:
-        """Gibt die verfügbaren Tools zurück"""
+        """Returns the available tools"""
         return [{
             "name": "query",
-            "description": "Führt eine Abfrage an Wolfram Alpha durch. Unterstützt mathematische Berechnungen, wissenschaftliche Fragen, Datenanalysen und mehr.",
+            "description": "Performs a query to Wolfram Alpha. Supports mathematical calculations, scientific questions, data analysis, and more.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
                     "input": {
                         "type": "string",
-                        "description": "Die Abfrage für Wolfram Alpha. Kann in natürlicher Sprache formuliert werden."
+                        "description": "The query for Wolfram Alpha. Can be formulated in natural language."
                     }
                 },
                 "required": ["input"]
@@ -76,33 +76,33 @@ class WolframAlphaServer:
         }]
 
 async def serve() -> None:
-    """Startet den Wolfram Alpha MCP Server"""
+    """Starts the Wolfram Alpha MCP Server"""
     server = Server("wolfram-alpha")
     wolfram_server = WolframAlphaServer()
 
     @server.list_tools()
     async def list_tools() -> List[Dict[str, Any]]:
-        """Listet die verfügbaren Tools"""
-        logger.info("Liste verfügbare Tools")
+        """Lists the available tools"""
+        logger.info("Listing available tools")
         return wolfram_server.get_tools()
 
     @server.call_tool()
     async def call_tool(name: str, arguments: Dict[str, Any]) -> List[TextContent]:
-        """Verarbeitet Tool-Aufrufe"""
-        logger.info(f"Verarbeite Tool-Aufruf: {name}")
+        """Processes tool calls"""
+        logger.info(f"Processing tool call: {name}")
         try:
             if name == "query":
                 result = await wolfram_server.query_wolfram_alpha(arguments["input"])
                 return [TextContent(type="text", text=result)]
             else:
-                raise ValueError(f"Unbekanntes Tool: {name}")
+                raise ValueError(f"Unknown tool: {name}")
         except Exception as e:
-            logger.error(f"Fehler bei Tool-Aufruf: {str(e)}")
+            logger.error(f"Error during tool call: {str(e)}")
             raise
 
-    # Initialisiere Server mit stdio Transport
+    # Initialize server with stdio transport
     async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
-        logger.info(f"Server {wolfram_server.server_name} v{wolfram_server.server_version} läuft und wartet auf Eingaben...")
+        logger.info(f"Server {wolfram_server.server_name} v{wolfram_server.server_version} is running and waiting for input...")
         await server.run(
             read_stream,
             write_stream,
@@ -117,7 +117,7 @@ async def serve() -> None:
         )
 
 def main():
-    """Hauptfunktion des Servers"""
+    """Main function of the server"""
     asyncio.run(serve())
 
 if __name__ == "__main__":

@@ -1,44 +1,49 @@
 # Wolfram Alpha MCP Server
 
-Ein einfacher MCP-Server für die Integration mit Wolfram Alpha.
+A simple MCP server for Wolfram Alpha integration.
 
 ## Installation
 
-1. Python 3.8 oder höher installieren
-2. Abhängigkeiten installieren:
+1. Install Python 3.8 or higher
+2. Install dependencies:
    ```bash
    pip install -e .
    ```
 
-## Konfiguration
+## Usage
 
-1. `.env` Datei erstellen:
-   ```
-   WOLFRAM_ALPHA_APPID=DEIN_API_KEY
-   ```
-
-## Verwendung
-
-Der Server kann über die Kommandozeile gestartet werden:
-
+The server can be started from the command line:
 ```bash
 python -m src.wolfram_alpha.server
 ```
 
-## MCP-Integration
+## API Documentation
 
-Der Server unterstützt derzeit eine Methode:
+The server currently supports one method:
 
-- `query`: Führt eine Abfrage an Wolfram Alpha durch
+- `query`: Performs a query to Wolfram Alpha
+
+## Configuration
+
+1. Create `.env` file:
+   ```
+   WOLFRAM_ALPHA_APPID=YOUR_API_KEY
+   ```
+
+## MCP Integration
+
+The server currently supports one method:
+
+- `query`: Performs a query to Wolfram Alpha
   - Parameter: `input` (String)
-  - Beispiel:
+  - Example:
     ```json
     {
       "jsonrpc": "2.0",
       "id": "1",
       "method": "query",
       "params": {
-        "input": "Was ist die Hauptstadt von Frankreich?"
+        "input": "What is the capital of France?"
       }
     }
     ``` 

@@ -1,57 +1,55 @@
 <mcp>
 name: wolfram-alpha-test
-description: Ein Test-Prompt für den Wolfram Alpha MCP Server
+description: A test prompt for the Wolfram Alpha MCP Server
 arguments:
   - name: test_type
-    description: Der Typ des Tests (math, science, conversion, formula)
+    description: The type of test (math, science, conversion, formula)
     required: true
 </mcp>
 
-# Wolfram Alpha Test Prompt
+# Wolfram Alpha MCP Server Test
 
-Dieser Prompt demonstriert die Fähigkeiten des Wolfram Alpha MCP Servers. Der Server kann:
+This prompt demonstrates the capabilities of the Wolfram Alpha MCP Server. The server can:
 
-1. Mathematische Berechnungen durchführen
-2. Wissenschaftliche Fragen beantworten
-3. Datenanalysen durchführen
-4. Einheiten umrechnen
-5. Formeln lösen
+1. Perform mathematical calculations
+2. Answer scientific questions
+3. Conduct data analysis
+4. Provide unit conversions
+5. Solve equations
 
-## Test-Szenario
+## Test Scenario
 
-Bitte führe folgende Tests durch:
+Please perform the following tests:
 
-1. **Mathematische Berechnung**:
-   - Berechne: 2 + 2
-   - Berechne: 3 * 4
-   - Berechne: 10 / 2
+1. **Mathematical Calculation**:
+   - Calculate: 2 + 2
+   - Calculate: 3 * 4
+   - Calculate: 10 / 2
 
-2. **Wissenschaftliche Frage**:
-   - Was ist die Geschwindigkeit des Lichts?
-   - Was ist die Masse der Erde?
-   - Was ist die Temperatur der Sonne?
+2. **Scientific Question**:
+   - What is the speed of light?
+   - What is the mass of the Earth?
+   - What is the temperature of the sun?
 
-3. **Einheitenumrechnung**:
-   - Konvertiere 100 Grad Celsius in Fahrenheit
-   - Konvertiere 1 Kilometer in Meilen
-   - Konvertiere 1 Kilogramm in Pfund
+3. **Unit Conversion**:
+   - Convert 100 degrees Celsius to Fahrenheit
+   - Convert 1 kilometer to miles
+   - Convert 1 kilogram to pounds
 
-4. **Formel-Lösung**:
-   - Löse die quadratische Gleichung: x^2 + 2x + 1 = 0
-   - Berechne die Ableitung von x^2
-   - Berechne das Integral von x^2
+4. **Equation Solving**:
+   - Solve the quadratic equation: x^2 + 2x + 1 = 0
 
-## Anweisungen
+## Instructions
 
-1. Verwende für jede Anfrage das `query`-Tool
-2. Formuliere die Anfragen in natürlicher Sprache
-3. Präsentiere die Ergebnisse klar und verständlich
-4. Füge bei Bedarf Erklärungen hinzu
+1. Use the `query` tool for each request
+2. Formulate requests in natural language
+3. Present results clearly and understandably
+4. Add explanations when needed
 
-## Erwartetes Ergebnis
+## Expected Result
 
-Der Server sollte:
-- Alle Anfragen korrekt verarbeiten
-- Klare und präzise Antworten liefern
-- Bei Bedarf zusätzliche Informationen bereitstellen
-- Fehler angemessen behandeln 
+The server should:
+- Process all requests correctly
+- Provide clear and precise answers
+- Provide additional information when needed
+- Handle errors appropriately 
