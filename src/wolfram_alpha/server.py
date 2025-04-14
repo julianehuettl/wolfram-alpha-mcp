@@ -62,13 +62,13 @@ class WolframAlphaServer:
         """Returns the available tools"""
         return [{
             "name": "query",
-            "description": "Performs a query to Wolfram Alpha. Supports mathematical calculations, scientific questions, data analysis, and more.",
+            "description": "Performs a query to Wolfram Alpha. Supports mathematical calculations, scientific questions, data analysis, and more. Note: Wolfram Alpha only understands English, so all queries must be in English.",
             "inputSchema": {
                 "type": "object",
                 "properties": {
                     "input": {
                         "type": "string",
-                        "description": "The query for Wolfram Alpha. Can be formulated in natural language."
+                        "description": "The query for Wolfram Alpha. Must be in English as Wolfram Alpha only understands English."
                     }
                 },
                 "required": ["input"]
