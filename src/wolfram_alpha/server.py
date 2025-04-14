@@ -112,4 +112,38 @@ async def serve() -> None:
         )]
 
     @server.call_tool()
-    async def call_tool(name: str, arguments: Dict[str, 
+    async def call_tool(name: str, arguments: Dict[str, Any]) -> List[TextContent]:
+        """Processes tool calls"""
+        logger.info(f"Processing tool call: {name}")
+        try:
+            if name == "wolfram_alpha_query":
+                if "input" not in arguments:
+                    raise McpError(ErrorData(
+                        code=INVALID_PARAMS,
+                        message="Input parameter is required"
+                    ))
+                result = await query_wolfram_alpha(api_key, arguments["input"])
+                return [TextContent(type="text", text=result)]
+            else:
+                raise McpError(ErrorData(
+                    code=INVALID_PARAMS,
+                    message=f"Unknown tool: {name}"
+                ))
+        except McpError:
+            raise
+        except Exception as e:
+            logger.error(f"Error during tool call: {str(e)}")
+            raise McpError(ErrorData(
+                code=INTERNAL_ERROR,
+                message=f"Error during tool call: {str(e)}"
+            ))
+
+    # Initialize server with stdio transport
+    async with stdio_server() as (read_stream, write_stream):
+        logger.info("Server wolfram-alpha is running and waiting for input...")
+        options = server.create_initialization_options()
+        await server.run(read_stream, write_stream, options)
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(serve()) 

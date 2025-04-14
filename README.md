@@ -1,49 +1,59 @@
 # Wolfram Alpha MCP Server
 
-A simple MCP server for Wolfram Alpha integration.
+A Model Context Protocol server that provides Wolfram Alpha integration capabilities. This server enables LLMs to perform mathematical calculations, answer scientific questions, and analyze data using Wolfram Alpha's powerful computational knowledge engine.
+
+## Available Tools
+
+- `wolfram_alpha_query` - Performs a query to Wolfram Alpha
+    - `input` (string, required): The query to send to Wolfram Alpha
+    - Formatting Rules:
+        1. Use natural language or simplified keywords
+        2. Use proper mathematical notation
+        3. Follow unit and constant formatting guidelines
+        4. Handle ambiguous queries appropriately
 
 ## Installation
 
-1. Install Python 3.8 or higher
-2. Install dependencies:
-   ```bash
-   pip install -e .
-   ```
+Install `wolfram-alpha-mcp` via pip:
 
-## Usage
-
-The server can be started from the command line:
 ```bash
-python -m src.wolfram_alpha.server
+pip install wolfram-alpha-mcp
 ```
 
-## API Documentation
+After installation, you can run it as a script using:
 
-The server currently supports one method:
-
-- `query`: Performs a query to Wolfram Alpha
+```bash
+python -m wolfram_alpha.server
+```
 
 ## Configuration
 
-1. Create `.env` file:
+### API Key Setup
+
+1. Create `.env` file in the project root:
    ```
    WOLFRAM_ALPHA_APPID=YOUR_API_KEY
    ```
 
-## MCP Integration
+### Configure for Claude.app
 
-The server currently supports one method:
+Add to your Claude settings:
 
-- `query`: Performs a query to Wolfram Alpha
-  - Parameter: `input` (String)
-  - Example:
-    ```json
-    {
-      "jsonrpc": "2.0",
-      "id": "1",
-      "method": "query",
-      "params": {
-        "input": "What is the capital of France?"
-      }
-    }
-    ``` 
+```json
+"mcpServers": {
+  "wolfram-alpha": {
+    "command": "python",
+    "args": ["-m", "wolfram_alpha.server"]
+  }
+}
+```
+
+## License
+
+wolfram-alpha-mcp is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Author
+
+Juliane Hüttl
+- GitHub: [julianehuettl](https://github.com/julianehuettl)
+- Website: [juliane-huettl.de](https://juliane-huettl.de) 
