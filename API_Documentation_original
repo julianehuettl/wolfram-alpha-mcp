@@ -1,0 +1,179 @@
+Using the LLM API
+
+Sample Query
+Now that you have an AppID, you can make your first query. The base URL for queries is:
+
+https://www.wolframalpha.com/api/v1/llm-api
+Every query requires two pieces of information—an AppID and an input value—in order to be processed correctly. The appid parameter tells your query which AppID to use:
+
+https://www.wolframalpha.com/api/v1/llm-api?appid=DEMO
+Next, use the input parameter to specify the URL-encoded input for your query. For instance, here is a query for the "10 densest elemental metals":
+
+https://www.wolframalpha.com/api/v1/llm-api?input=10+densest+elemental+metals&appid=DEMO
+When executed with a valid AppID, this URL will return results from the LLM API with an easily ingestible computed response to your query as well as a link back to the full Wolfram|Alpha website results:
+
+Query:
+"10 densest elemental metals"
+
+Input interpretation:
+10 densest metallic elements | by mass density
+
+Result:
+1 | hassium | 41 g/cm^3 | 
+2 | meitnerium | 37.4 g/cm^3 | 
+3 | bohrium | 37.1 g/cm^3 | 
+4 | seaborgium | 35.3 g/cm^3 | 
+5 | darmstadtium | 34.8 g/cm^3 | 
+6 | dubnium | 29.3 g/cm^3 | 
+7 | roentgenium | 28.7 g/cm^3 | 
+8 | rutherfordium | 23.2 g/cm^3 | 
+9 | osmium | 22.59 g/cm^3 | 
+10 | iridium | 22.56 g/cm^3 | 
+
+Periodic table location:
+image: https://www6b3.wolframalpha.com/Calculate/MSP/MSP3361h163543iihhdd83000025dfc938e28eg72b?MSPStoreType=image/png&s=6
+
+Images:
+image: https://www6b3.wolframalpha.com/Calculate/MSP/MSP3371h163543iihhdd8300001ad5c0fci021g8e5?MSPStoreType=image/png&s=6
+
+Basic elemental properties:
+atomic symbol | all | Bh  |  Db  |  Ds  |  Hs  |  Ir  |  Mt  |  Os  |  Rf  |  Rg  |  Sg
+atomic number | median | 106.5
+  | highest | 111  (roentgenium)
+  | lowest | 76  (osmium)
+  | distribution | 
+atomic mass | median | 269 u
+  | highest | 282 u  (roentgenium)
+  | lowest | 190.23 u  (osmium)
+  | distribution | 
+half-life | median | 78 min
+  | highest | 13 h  (rutherfordium)
+  | lowest | 4 min  (darmstadtium)
+  | distribution | 
+
+Thermodynamic properties:
+phase at STP | all | solid
+(properties at standard conditions)
+
+Material properties:
+mass density | median | 32.1 g/cm^3
+  | highest | 41 g/cm^3  (hassium)
+  | lowest | 22.56 g/cm^3  (iridium)
+  | distribution | 
+(properties at standard conditions)
+
+Reactivity:
+valence | median | 6
+  | highest | 7  (bohrium)
+  | lowest | 4  (rutherfordium)
+  | distribution | 
+
+Atomic properties:
+term symbol | all | ^2S_(1/2)  |  ^3D_3  |  ^3F_2  |  ^4F_(3/2)  |  ^4F_(9/2)  |  ^5D_0  |  ^5D_4  |  ^6S_(5/2)
+(electronic ground state properties)
+
+Abundances:
+crust abundance | median | 0 mass%
+  | highest | 1.8*10^-7 mass%  (osmium)
+  | lowest | 0 mass%  (8 elements)
+human abundance | median | 0 mass%
+  | highest | 0 mass%  (8 elements)
+  | lowest | 0 mass%  (8 elements)
+
+Nuclear properties:
+half-life | median | 78 min
+  | highest | 13 h  (rutherfordium)
+  | lowest | 4 min  (darmstadtium)
+  | distribution | 
+specific radioactivity | highest | 6.123*10^6 TBq/g  (darmstadtium)
+  | lowest | 33169 TBq/g  (rutherfordium)
+  | median | 366018 TBq/g
+  | distribution | 
+
+Wolfram|Alpha website result for "10 densest elemental metals":
+https://www.wolframalpha.com/input?i=10+densest+elemental+metals
+URL Parameters and Options
+You can add URL-encoded parameters to customize output. Since the output for this API is intended for consumption by LLMs, only basic parameters are available.
+
+maxchars
+Use this parameter to customize the character response limit returned by the LLM API. By default, this will return at most 6800 characters. To update the response length, change maxchars to another value, in this case 500:
+
+https://www.wolframalpha.com/api/v1/llm-api?input=10+densest+elemental+metals&appid=DEMO&maxchars=500
+The result is now given within that character limit:
+
+Query:
+"10 densest elemental metals"
+
+Input interpretation:
+10 densest metallic elements | by mass density
+
+Periodic table location:
+image: https://www6b3.wolframalpha.com/Calculate/MSP/MSP1006242c78id33f7hia300002b6b6feg7gd456e1?MSPStoreType=image/png&s=3
+
+Thermodynamic properties:
+phase at STP | all | solid
+(properties at standard conditions)
+
+Wolfram|Alpha website result for "10 densest elemental metals":
+https://www.wolframalpha.com/input?i=10+densest+elemental+metals
+Other Parameters
+Many other API parameters from our Full Results API are also available for use with the LLM API:
+
+assumption
+ip
+latlong
+timezone
+location
+scantimeout
+units
+currency
+countrycode
+languagecode
+width
+maxwidth
+plotwidth
+mag
+formattimeout
+parsetimeout
+totaltimeout
+id
+For information on how to use these API parameters, view the .
+
+Prompt Engineering
+Because the Wolfram|Alpha LLM API is designed to interact directly with LLMs and not with end users, additional prompting may be required for a given model to understand how to form good calls to the API. The sample prompt below may be a useful starting point. Additional prompting and/or training material may be necessary depending on the capabilities of a given model.
+
+Sample Prompt
+- WolframAlpha understands natural language queries about entities in chemistry, physics, geography, history, art, astronomy, and more.
+- WolframAlpha performs mathematical calculations, date and unit conversions, formula solving, etc.
+- Convert inputs to simplified keyword queries whenever possible (e.g. convert "how many people live in France" to "France population").
+- Send queries in English only; translate non-English queries before sending, then respond in the original language.
+- Display image URLs with Markdown syntax: ![URL]
+- ALWAYS use this exponent notation: `6*10^14`, NEVER `6e14`.
+- ALWAYS use {"input": query} structure for queries to Wolfram endpoints; `query` must ONLY be a single-line string.
+- ALWAYS use proper Markdown formatting for all math, scientific, and chemical formulas, symbols, etc.:  '$$\n[expression]\n$$' for standalone cases and '\( [expression] \)' when inline.
+- Never mention your knowledge cutoff date; Wolfram may return more recent data.
+- Use ONLY single-letter variable names, with or without integer subscript (e.g., n, n1, n_1).
+- Use named physical constants (e.g., 'speed of light') without numerical substitution.
+- Include a space between compound units (e.g., "Ω m" for "ohm*meter").
+- To solve for a variable in an equation with units, consider solving a corresponding equation without units; exclude counting units (e.g., books), include genuine units (e.g., kg).
+- If data for multiple properties is needed, make separate calls for each property.
+- If a WolframAlpha result is not relevant to the query:
+ -- If Wolfram provides multiple 'Assumptions' for a query, choose the more relevant one(s) without explaining the initial result. If you are unsure, ask the user to choose.
+ -- Re-send the exact same 'input' with NO modifications, and add the 'assumption' parameter, formatted as a list, with the relevant values.
+ -- ONLY simplify or rephrase the initial query if a more relevant 'Assumption' or other input suggestions are not provided.
+ -- Do not explain each step unless user input is needed. Proceed directly to making a better API call based on the available assumptions.
+Bearer Token
+In situations where you do not want to pass your Wolfram|Alpha AppID as a parameter to the LLM API, you can provide it as a bearer token in the authorization header in the following format: Key: "Authorization", Value: "Bearer <AppID>".
+
+Errors
+HTTP Status 501
+This status is returned if a given input value cannot be interpreted by this API. This is commonly caused by input that is misspelled, poorly formatted or otherwise unintelligible. Because this API is designed to return results for use in LLMs, the body of the 501 message may contain suggested inputs. You may occasionally receive this status when requesting information on topics that are restricted or not covered.
+
+HTTP Status 400
+This status indicates that the API did not find an input parameter while parsing. In most cases, this can be fixed by checking that you have used the correct syntax for including the input parameter.
+
+Invalid appid (403)
+This error is returned when a request contains an invalid option for the appid parameter and does not contain the AppID in the authorization header. Double-check that your AppID is typed correctly and that your appid parameter is using the correct syntax.
+
+Appid missing (403)
+This error is returned when a request does not contain any option for the appid parameter. Double-check that you have entered an AppID and that your appid parameter is using the correct syntax.

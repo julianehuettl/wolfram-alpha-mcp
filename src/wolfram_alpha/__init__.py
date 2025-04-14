@@ -1,0 +1,3 @@
+"""
+Wolfram Alpha MCP Server
+""" 
