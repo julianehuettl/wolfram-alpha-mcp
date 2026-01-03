@@ -12,41 +12,67 @@ A Model Context Protocol server that provides Wolfram Alpha integration capabili
         3. Follow unit and constant formatting guidelines
         4. Handle ambiguous queries appropriately
 
+## Requirements
+
+- Python 3.11 or higher
+- Wolfram Alpha API Key ([Get one here](https://products.wolframalpha.com/api/))
+
 ## Installation
 
-Install `wolfram-alpha-mcp` via pip:
+### For Development
 
-```bash
-pip install wolfram-alpha-mcp
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/julianehuettl/wolfram-alpha-mcp.git
+   cd wolfram-alpha-mcp
+   ```
 
-After installation, you can run it as a script using:
+2. Create and activate virtual environment:
+   ```bash
+   # Using uv (recommended)
+   uv venv
 
-```bash
-python -m wolfram_alpha.server
-```
+   # Or using standard venv
+   python -m venv .venv
+   ```
+
+3. Install in editable mode with dependencies:
+   ```bash
+   # Using uv
+   uv pip install -e .
+
+   # Or using pip
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   pip install -e .
+   ```
 
 ## Configuration
 
 ### API Key Setup
 
-1. Create `.env` file in the project root:
+1. Create a `.env` file in the project root directory:
    ```
-   WOLFRAM_ALPHA_APPID=YOUR_API_KEY
+   WOLFRAM_ALPHA_APPID=your_api_key_here
    ```
 
-### Configure for Claude.app
+2. Get your API key from [Wolfram Alpha Developer Portal](https://products.wolframalpha.com/api/)
 
-Add to your Claude settings:
+### Configure for Claude Desktop
+
+Add to your Claude Desktop configuration file (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
 
 ```json
 "mcpServers": {
   "wolfram-alpha": {
-    "command": "python",
+    "command": "/absolute/path/to/wolfram-alpha-mcp/.venv/bin/python",
     "args": ["-m", "wolfram_alpha.server"]
   }
 }
 ```
+
+Replace `/absolute/path/to/wolfram-alpha-mcp/` with the actual path to your cloned repository.
+
+After updating the configuration, restart Claude Desktop for the changes to take effect.
 
 ## License
 
