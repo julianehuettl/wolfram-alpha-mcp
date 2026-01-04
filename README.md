@@ -36,14 +36,14 @@ A Model Context Protocol server that provides Wolfram Alpha integration capabili
    python -m venv .venv
    ```
 
-3. Install in editable mode with dependencies:
+3. Install with dependencies from local source:
    ```bash
-   # Using uv
-   uv pip install -e .
+   # Using uv (recommended)
+   uv pip install .
 
-   # Or using pip
+   # Or using standard pip
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   pip install -e .
+   pip install .
    ```
 
 ## Configuration
